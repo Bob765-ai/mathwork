@@ -1,1 +1,44 @@
+import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Gamepad2 } from "lucide-react";
+
+const games = [
+  { id: 1, name: "Cyber Quest", description: "A futuristic RPG adventure", image: "/cyberquest.jpg" },
+  { id: 2, name: "Speed Racer X", description: "High-speed racing action", image: "/speedracer.jpg" },
+  { id: 3, name: "Dragon's Fury", description: "An epic fantasy battle", image: "/dragonsfury.jpg" },
+];
+
+export default function GamingSite() {
+  const [selectedGame, setSelectedGame] = useState(games[0]);
+
+  return (
+    <div className="p-6 bg-gray-900 text-white min-h-screen">
+      <h1 className="text-3xl font-bold mb-6 flex items-center gap-2">
+        <Gamepad2 /> Gaming Hub
+      </h1>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="md:col-span-2">
+          <Card>
+            <CardContent className="p-4">
+              <img src={selectedGame.image} alt={selectedGame.name} className="w-full h-64 object-cover rounded-xl" />
+              <h2 className="text-xl font-semibold mt-4">{selectedGame.name}</h2>
+              <p className="text-gray-300 mt-2">{selectedGame.description}</p>
+            </CardContent>
+          </Card>
+        </div>
+        <div>
+          <h2 className="text-lg font-semibold mb-4">Popular Games</h2>
+          <div className="space-y-4">
+            {games.map((game) => (
+              <Button key={game.id} variant="outline" onClick={() => setSelectedGame(game)} className="w-full">
+                {game.name}
+              </Button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
